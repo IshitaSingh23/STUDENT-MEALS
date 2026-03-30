@@ -92,9 +92,6 @@ The project produces:
 - Descriptive summaries and visualizations
 - Exploratory regression results linking nutrition quality and academic outcomes
 
-## Author
-**Ishita Singh**  
-MS in Statistics, University of Illinois Urbana–Champaign
 
 ---
 
