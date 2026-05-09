@@ -1,97 +1,145 @@
-# 📊 School Meal Nutrition Quality & Academic Performance in Illinois
+# District-Level Analysis of Nutrition, SES, and Academic Performance
 
-## Overview
-School meal programs play a critical role in supporting student health, well-being, and learning outcomes, particularly for students from low-income households. Despite their importance, there is limited integrated evidence examining how the nutritional quality of school meals varies across districts and how this variation aligns with academic performance.
+This project analyzes district-level relationships between school meal nutrition measures, socioeconomic factors, and academic performance in Illinois public schools. The analysis was completed for **STAT 427: Statistical Consulting** in collaboration with **Dr. Ru Liu** from the **Department of Health & Kinesiology, UIUC**.
 
-This project analyzes the relationship between **school meal nutrition quality** and **academic proficiency outcomes** across **Illinois public elementary school districts**. By combining multiple datasets on school meals, student demographics, and standardized test performance, the project provides a district-level view of how nutrition quality relates to educational outcomes and equity considerations.
+The main goal was to understand how nutrition-related variables and socioeconomic indicators are associated with academic proficiency outcomes in:
 
----
+- ELA
+- Math
+- Science
 
-## Objectives
-The primary objectives of this project are to:
-- Characterize variation in school meal nutrition quality across Illinois school districts
-- Examine associations between nutrition quality and academic proficiency in:
-  - English Language Arts (ELA)
-  - Mathematics
-  - Science
-- Explore how these relationships differ for:
-  - Low-income students
-  - Students with disabilities
-- Provide an integrated, analysis-ready dataset to support policy-relevant evaluation of school meal programs
+The results are interpreted as **associations only**, not causal effects.
 
 ---
 
-## Data Sources
-This project integrates three primary data sources:
+## Dataset
 
-1. **School Meal Nutrition Data (MEALS Study)**  
-   - Menu-level nutrition composition data
-   - Healthy Eating Index (HEI-2015) total and component scores
-   - Aggregated to the district level
+The main dataset used in this project is:
 
-2. **Academic Performance Data (Illinois State Assessments)**  
-   - District-level proficiency rates for ELA, Math, and Science
-   - Subgroup proficiency for low-income students and students with disabilities
+```text
+academic_meals_elementary_district.csv
+```
 
-3. **District Demographic & Contextual Data**
-   - Percentage of low-income students
-   - Percentage of students with disabilities
-   - Regional education office (ROE) identifiers
+The dataset contains district-level information on:
 
-All datasets are restricted to **public elementary schools** and aggregated to the **district level**.
+Academic proficiency outcomes
+Socioeconomic indicators
+HEI 2015 nutrition scores
+Macro- and micronutrient variables
+Other school meal nutrition-related measures
 
----
+Project Motivation
 
-## Key Variables
+The dataset has many nutrition predictors but only a small number of school districts. This creates a high-dimensional modeling problem where ordinary regression can become unstable due to multicollinearity and influential observations.
 
-### Academic Outcomes
-- `ELA_Proficiency`
-- `Math_Proficiency`
-- `Science_Proficiency`
-- Subgroup outcomes:
-  - Low-income students
-  - Children with disabilities (CWD)
+Because of this, the project focused on:
 
-### Nutrition Quality Measures
-- `HEI 2015 Total Score`
-- HEI component scores (fruits, vegetables, whole grains, sodium, added sugars, saturated fats, etc.)
-
-### Covariates
-- `student_low_income_percent`
-- `student_disabilities_percent`
-- `days_entered` (menu sampling coverage)
-- `ROE`
-
----
-
-## Methodology
-
-### Data Processing
-- Nutrition data aggregated from menu-level observations to district-level means
-- Academic performance data cleaned and harmonized across subjects
-- District names standardized to enable accurate merging
-- Final dataset restricted to elementary school districts with valid academic and nutrition data
-
-### Exploratory Data Analysis
-- Descriptive statistics of nutrition and academic variables
-- Visualization of distributions and cross-district variation
-- Correlation analysis between nutrition quality and academic outcomes
-
-### Exploratory Modeling
-- Linear regression models examining associations between:
-  - HEI scores and academic proficiency
-- Models adjusted for district-level socioeconomic characteristics
-- Subgroup analyses for low-income students and students with disabilities
-- Modeling used for **exploratory insight**, not causal inference
-
----
-
-## Outputs
-The project produces:
-- A cleaned, integrated district-level dataset
-- Descriptive summaries and visualizations
-- Exploratory regression results linking nutrition quality and academic outcomes
+Cleaning and preparing the dataset
+Reducing redundant predictors
+Handling multicollinearity
+Comparing multiple regression-based models
+Running model diagnostics
+Selecting interpretable models for ELA, Math, Science, and average academic score
 
 
----
+Repository Files
 
+The main files in this repository are:
+
+```bash
+academic_meals_elementary_district.csv
+ELA Model.ipynb
+Math Model.ipynb
+Science Model.ipynb
+Final Average Model.ipynb
+File Descriptions
+academic_meals_elementary_district.csv
+```
+
+This is the main district-level dataset used for the analysis.
+
+ELA Model.ipynb
+
+This notebook contains the full modeling workflow for ELA proficiency.
+It includes:
+
+Data cleaning and preprocessing
+Predictor filtering
+Multicollinearity checks
+Baseline OLS regression
+Ridge regression
+Lasso regression
+Diagnostic checks
+Final model interpretation
+Math Model.ipynb
+
+This notebook contains the full modeling workflow for Math proficiency.
+
+It includes the same modeling steps as the ELA notebook, but with Math proficiency as the response variable.
+
+Science Model.ipynb
+
+This notebook contains the full modeling workflow for Science proficiency.
+It includes preprocessing, regression models, regularized models, diagnostics, and final model selection for Science.
+
+Final Average Model.ipynb
+
+This notebook creates an average academic score using ELA, Math, and Science proficiency outcomes.
+
+It then fits models on the average score to understand broad cross-subject academic patterns.
+
+
+
+How to Run the Code
+1. Clone the repository
+git clone <your-repository-link>
+cd <your-repository-name>
+2. Create a virtual environment
+python -m venv venv
+
+Activate the environment:
+
+For Mac/Linux:
+
+source venv/bin/activate
+
+For Windows:
+
+venv\Scripts\activate
+3. Install required libraries
+pip install pandas numpy matplotlib seaborn scikit-learn statsmodels scipy jupyter
+4. Open Jupyter Notebook
+jupyter notebook
+5. Run the notebooks
+
+Run the notebooks in this order:
+
+1. ELA Model.ipynb
+2. Math Model.ipynb
+3. Science Model.ipynb
+4. Final Average Model.ipynb
+
+Each notebook is self-contained for its respective outcome, but all notebooks use the same dataset:
+
+academic_meals_elementary_district.csv
+Main Libraries Used
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+statsmodels
+scipy
+jupyter
+Modeling Methods Used
+
+The project used:
+
+Ordinary Least Squares regression
+Ridge regression
+Lasso regression
+Correlation filtering
+Variance Inflation Factor filtering
+Cross-validation
+Residual diagnostics
+Influence diagnostics
