@@ -1,6 +1,6 @@
 # District-Level Analysis of Nutrition, SES, and Academic Performance
 
-This project analyzes district-level relationships between school meal nutrition measures, socioeconomic factors, and academic performance in Illinois public schools. The analysis was completed for **STAT 427: Statistical Consulting** in collaboration with **Dr. Ru Liu** from the **Department of Health & Kinesiology, UIUC**.
+This project analyzes district-level relationships between school meal nutrition measures, socioeconomic factors, and academic performance in Illinois public schools.
 
 The main goal was to understand how nutrition-related variables and socioeconomic indicators are associated with academic proficiency outcomes in:
 
@@ -92,35 +92,46 @@ It then fits models on the average score to understand broad cross-subject acade
 
 How to Run the Code
 1. Clone the repository
+```bash
 git clone <your-repository-link>
 cd <your-repository-name>
+```
 2. Create a virtual environment
+```bash
 python -m venv venv
+```
 
 Activate the environment:
 
 For Mac/Linux:
 
+```bash
 source venv/bin/activate
+```
 
 For Windows:
 
+```bash
 venv\Scripts\activate
 3. Install required libraries
 pip install pandas numpy matplotlib seaborn scikit-learn statsmodels scipy jupyter
 4. Open Jupyter Notebook
 jupyter notebook
 5. Run the notebooks
+```
 
 Run the notebooks in this order:
 
+```bash
 1. ELA Model.ipynb
 2. Math Model.ipynb
 3. Science Model.ipynb
 4. Final Average Model.ipynb
+```
 
 Each notebook is self-contained for its respective outcome, but all notebooks use the same dataset:
 
+```bash
 academic_meals_elementary_district.csv
 Main Libraries Used
 pandas
@@ -132,9 +143,11 @@ statsmodels
 scipy
 jupyter
 Modeling Methods Used
+```
 
 The project used:
 
+```bash
 Ordinary Least Squares regression
 Ridge regression
 Lasso regression
@@ -143,3 +156,4 @@ Variance Inflation Factor filtering
 Cross-validation
 Residual diagnostics
 Influence diagnostics
+```
